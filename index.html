@@ -4,8 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hello, World!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bcrypt.js/2.4.0/bcrypt.min.js"></script>
 </head>
 <body>
     <h1>Hello, World!</h1>
+    <input type="password" id="passwordInput">
+<button onclick="checkPassword()">View Project</button>
+<div id="protectedContent" style="display: none;">
+    <!-- Your protected content goes here -->
+    <h2>Protected Content</h2>
+</div>
+
 </body>
+<script>
+    // This is a bcrypt hash of the password "secretPassword". 
+    // Replace this with the bcrypt hash of your chosen password.
+    const passwordHash = "$2a$10$W5Pvho5MBkE9E2mHZvwZw.4LZ3G83WaOgZ3He6VFjNxulTTcEVL52";
+
+    function checkPassword() {
+        const userInput = document.getElementById("passwordInput").value;
+
+        if (bcrypt.compareSync(userInput, passwordHash)) {
+            // Passwords match
+            document.getElementById("protectedContent").style.display = "block";
+        } else {
+            // Passwords don't match
+            alert("Incorrect password. Please try again.");
+        }
+    }
+</script>
+
 </html>
+
